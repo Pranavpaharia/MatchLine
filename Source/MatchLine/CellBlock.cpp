@@ -26,12 +26,6 @@ ACellBlock::ACellBlock()
 	};
 
 	static FConstructorStatics ConstructorStatics;
-
-
-
-	//Create Root Scene Component
-	//DummyRoot = CreateDefaultSubobject<USceneComponent>(TEXT("DummyComponent"));
-	//RootComponent = DummyRoot;
 	
 	CollisionBox = CreateDefaultSubobject<UBoxComponent>(FName("CollisionBox"));
 	CollisionBox->InitBoxExtent(FVector(30, 70, 80));
@@ -40,14 +34,9 @@ ACellBlock::ACellBlock()
 	CollisionBox->SetCollisionResponseToAllChannels(ECR_Block);
 	CollisionBox->SetCollisionObjectType(ECC_WorldDynamic);
 	CollisionBox->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	/*CollisionBox->BodyInstance.bLockZRotation;
-	CollisionBox->BodyInstance.bLockXTranslation;*/
-	//CollisionBox->BodyInstance.DOFConstraint->SetLinearZMotion(ELinearConstraintMotion::LCM_Free);
 	CollisionBox->SetLinearDamping(1.f);
 	CollisionBox->SetAngularDamping(1.f);
 	CollisionBox->SetPhysMaterialOverride(ConstructorStatics.PhysicsMat.Get());
-	//CollisionBox->BodyInstance
-	//CollisionBox->BodyInstance.bLockRotation = 1;
 	SetRootComponent(CollisionBox);
 
 	//Create Static Mesh Component
@@ -58,20 +47,8 @@ ACellBlock::ACellBlock()
 	BlockMesh->SetMaterial(0, ConstructorStatics.BaseMat.Get());
 	BlockMesh->SetSimulatePhysics(false);
 	BlockMesh->SetCollisionResponseToAllChannels(ECR_Overlap);
-	/*BlockMesh->SetConstraintMode(EDOFMode::YZPlane);
-	BlockMesh->BodyInstance.bLockXRotation;
-	BlockMesh->SetLinearDamping(1.f);*/
-	//BlockMesh->SetupAttachment(DummyRoot);
-
-
-	//BlockMesh->OnClicked.AddDynamic(this, &ACellBlock::BlockClicked);
 	
-	//BoxComponent->CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComponent"));
-	//BoxComponent->SetBoxExtent(FVector(1.f,1.f,1.f), true);
-	//BoxComponent->SetupAttachment(DummyRoot);
-
-
-	//BlockMesh = ConstructorStatics.BlockMesh.Get();
+	
 	BaseMaterial = ConstructorStatics.BaseMat.Get();
 	BasePhysicsMat = ConstructorStatics.PhysicsMat.Get();
 	hightlightColor = FLinearColor::FromSRGBColor(FColor::Emerald);
@@ -94,14 +71,12 @@ void ACellBlock::BeginPlay()
 
 	SetBoxCategory();
 
-	//ActivateMomentumDelegate.AddDynamic(this, &ACellBlock::StartTimerForMomentumCheck);
 }
 
 // Called every frame
 void ACellBlock::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//GetBodyMomentum();
 }
 
 void ACellBlock::SetBoxCategory()
