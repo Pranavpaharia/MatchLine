@@ -1,0 +1,18 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{CA036100-4250-43E7-00B1-9FBE41F35017}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "MatchLine",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"CoreUObject",
+				"UMG"
+			]
+		}
+	]
+}
