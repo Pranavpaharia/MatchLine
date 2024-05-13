@@ -60,10 +60,10 @@ void AGridBeacon::FireRay()
 
 	for (auto hitResult : HitResults)
 	{
-		if (hitResult.Actor.IsValid())
+		if (hitResult.GetActor()->IsValidLowLevel())
 		{
 			FString strName;
-			hitResult.Actor->GetName(strName);
+			hitResult.GetActor()->GetName(strName);
 			//UE_LOG(LogTemp, Warning, TEXT("Block Hit with Name: %s "), *strName);
 
 			IPlayerActionInterface* playerInterface = Cast<IPlayerActionInterface>(hitResult.GetActor());

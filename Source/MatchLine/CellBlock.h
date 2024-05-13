@@ -27,8 +27,6 @@ class MATCHLINE_API ACellBlock : public AActor, public IPlayerActionInterface
 	UPROPERTY()
 	UMaterial* BaseMaterial;
 
-	UPROPERTY()
-	UPhysicalMaterial* BasePhysicsMat;
 
 	UPROPERTY()
 	UMaterialInstanceDynamic* dynamicMaterial;

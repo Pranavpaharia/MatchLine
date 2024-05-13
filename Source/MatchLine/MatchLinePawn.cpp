@@ -1,7 +1,7 @@
 // Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
 
 #include "MatchLinePawn.h"
-#include "HeadMountedDisplayFunctionLibrary.h"
+//#include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "MatchLineSubSystem.h"
@@ -36,7 +36,6 @@ void AMatchLinePawn::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	PlayerInputComponent->BindAction("ResetVR", EInputEvent::IE_Pressed, this, &AMatchLinePawn::OnResetVR);
 	PlayerInputComponent->BindAction("MouseClick", EInputEvent::IE_Pressed, this, &AMatchLinePawn::OnMouseDownToSelectFirstCube);
 	PlayerInputComponent->BindAction("MouseClick", EInputEvent::IE_Released, this, &AMatchLinePawn::OnMouseReleasedToSelectSecondCube);
 }
@@ -50,10 +49,6 @@ void AMatchLinePawn::CalcCamera(float DeltaTime, struct FMinimalViewInfo& OutRes
 	//OutResult.ProjectionMode = ECameraProjectionMode.Orthographic;
 }
 
-void AMatchLinePawn::OnResetVR()
-{
-	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
-}
 
 void AMatchLinePawn::OnMouseReleasedToSelectSecondCube()
 {
@@ -142,15 +137,15 @@ ACellBlock* AMatchLinePawn::RayCastForCube(FVector& StartPosition, FVector& EndP
 		DrawDebugSolidBox(GetWorld(), HitResult.Location, FVector(20.0f), FColor::Red);
 	}
 
-	if (HitResult.Actor.IsValid())
+	if (HitResult.GetActor()->IsValidLowLevel())
 	{
 
-		if (HitResult.Actor->GetClass()->ImplementsInterface(UPlayerActionInterface::StaticClass()))
+		if (HitResult.GetActor()->GetClass()->ImplementsInterface(UPlayerActionInterface::StaticClass()))
 		{
 
 		}
 
-		ACellBlock* HitBlock = Cast<ACellBlock>(HitResult.Actor.Get());
+		ACellBlock* HitBlock = Cast<ACellBlock>(HitResult.GetActor());
 		if (HitBlock != nullptr)
 		{
 			targetblock = HitBlock;

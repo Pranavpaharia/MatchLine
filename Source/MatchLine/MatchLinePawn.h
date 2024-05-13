@@ -46,7 +46,6 @@ public:
 	
 
 protected:
-	void OnResetVR();
 	
 	void OnMouseDownToSelectFirstCube();
 	

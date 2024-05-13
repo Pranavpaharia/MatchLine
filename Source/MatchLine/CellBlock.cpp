@@ -12,14 +12,12 @@ ACellBlock::ACellBlock()
 	{
 		ConstructorHelpers::FObjectFinderOptional<UStaticMesh> BlockMesh;
 		ConstructorHelpers::FObjectFinderOptional<UMaterial> BaseMat;
-		ConstructorHelpers::FObjectFinderOptional<UPhysicalMaterial> PhysicsMat;
 
 		
 
 		FConstructorStatics()
 			: BlockMesh(TEXT("/Game/Geometry/Meshes/1M_Cube.1M_Cube"))
 			, BaseMat(TEXT("Material'/Game/StarterContent/Materials/M_Basic_Wall.M_Basic_Wall'"))
-			, PhysicsMat(TEXT("PhysicalMaterial'/Game/Puzzle/BoxMaterial.BoxMaterial'"))
 		{
 
 		} 
@@ -36,7 +34,6 @@ ACellBlock::ACellBlock()
 	CollisionBox->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	CollisionBox->SetLinearDamping(1.f);
 	CollisionBox->SetAngularDamping(1.f);
-	CollisionBox->SetPhysMaterialOverride(ConstructorStatics.PhysicsMat.Get());
 	SetRootComponent(CollisionBox);
 
 	//Create Static Mesh Component
@@ -50,7 +47,6 @@ ACellBlock::ACellBlock()
 	
 	
 	BaseMaterial = ConstructorStatics.BaseMat.Get();
-	BasePhysicsMat = ConstructorStatics.PhysicsMat.Get();
 	hightlightColor = FLinearColor::FromSRGBColor(FColor::Emerald);
 
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
